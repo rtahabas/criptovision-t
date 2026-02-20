@@ -23,6 +23,7 @@ import {
 import { getNotifications } from "../../redux/action/notification";
 import { getTasks } from "../../redux/action/task";
 import ChangePassword from "../../Pages/Auth/ChangePassword";
+import { useTimezone } from "../../hooks/useTimezone";
 
 const blue = {
   100: "#DAECFF",
@@ -102,7 +103,7 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
   const { tasks } = useSelector((state) => state.task);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const timeZone = useTimezone();
   /////////////////////////////////////////// STATES ////////////////////////////////////////////////
   const [date, setDate] = useState(new Date());
   const [openPasswordChange, setOpenPasswordChange] = useState(false);
@@ -145,7 +146,8 @@ const Navbar = ({ setShowSidebar, showSidebar, open, setOpen }) => {
             </IconButton>
             <div>
               <p className="text-sky-400 text-xl gap-1 flex items-center">
-                <PiTimerLight className="text-[25px]" /> {date.toLocaleTimeString()}
+                <PiTimerLight className="text-[25px]" /> {date.toLocaleTimeString()} 
+                <p className="text-sm text-gray-500">{timeZone ? `${timeZone}` : ""}</p> 
               </p>
             </div>
           </div>

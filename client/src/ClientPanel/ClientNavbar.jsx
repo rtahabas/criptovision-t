@@ -21,6 +21,7 @@ import {
   PiUserPlus,
 } from "react-icons/pi";
 import ChangePassword from "../Pages/Auth/ChangePassword";
+import { useTimezone } from "../hooks/useTimezone";
 
 const blue = {
   100: "#DAECFF",
@@ -99,7 +100,7 @@ const ClientNavbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const timeZone = useTimezone();
   /////////////////////////////////////////// STATES ////////////////////////////////////////////////
   const [date, setDate] = useState(new Date());
   const [openPasswordChange, setOpenPasswordChange] = useState(false);
@@ -136,6 +137,7 @@ const ClientNavbar = () => {
         <div>
           <p className="text-sky-400 text-xl gap-1 flex items-center sm:visible invisible">
             <PiTimerLight className="text-[25px]" /> {date.toLocaleTimeString()}
+            <p className="text-sm text-gray-500">{timeZone ? `${timeZone}` : ""}</p> 
           </p>
         </div>
 
