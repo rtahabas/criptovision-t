@@ -8,9 +8,9 @@ import { FiFilter } from "react-icons/fi";
 import CreateUser from "./CreateEmployee";
 import Filter from "./Filter";
 import { searchUserReducer } from "../../redux/reducer/user";
+import CreateClient from "./CreateClients";
 
 const Topbar = ({ view, setView, setIsFiltered, isFiltered }) => {
-
   ///////////////////////////////////////// VARIABLES ///////////////////////////////////////////////////
   const { pathname } = useLocation();
   const pathArr = pathname.split("/").filter((item) => item != "");
@@ -25,6 +25,7 @@ const Topbar = ({ view, setView, setIsFiltered, isFiltered }) => {
   ///////////////////////////////////////// STATES ///////////////////////////////////////////////////
   const [open, setOpen] = useState(false);
   const [openFilters, setOpenFilters] = useState(false);
+  const [openClient, setOpenClient] = useState(false);
   const [scroll, setScroll] = useState("paper");
 
   ///////////////////////////////////////// USE EFFECTS ///////////////////////////////////////////////////
@@ -47,6 +48,11 @@ const Topbar = ({ view, setView, setIsFiltered, isFiltered }) => {
 
   const handleCreateopen = (scrollType) => () => {
     setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleCreateClient = (scrollType) => () => {
+    setOpenClient(true);
     setScroll(scrollType);
   };
 
@@ -73,6 +79,7 @@ const Topbar = ({ view, setView, setIsFiltered, isFiltered }) => {
               <FormControl>
                 <Input
                   name="search"
+                  onChange={(e) => handleSearch(e.target.value)}
                   placeholder="Search Employees"
                   startAdornment={
                     <InputAdornment position="start">
@@ -105,25 +112,37 @@ const Topbar = ({ view, setView, setIsFiltered, isFiltered }) => {
         )}
 
         {showClientTopBar && showCreatePageTopBar && (
-          <div className="flex items-center gap-2">
-            <div className="bg-[#ebf2f5] hover:bg-[#dfe6e8] p-1 pl-2 pr-2 rounded-md w-auto">
-              <FormControl>
-                <Input
-                  name="search"
-                  fullWidth="true"
-                  placeholder="Search Clients"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <PiMagnifyingGlass className="text-[25px]" />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
+          <>
+            <div className="flex items-center gap-2">
+              <div className="bg-[#ebf2f5] hover:bg-[#dfe6e8] p-1 pl-2 pr-2 rounded-md w-auto">
+                <FormControl>
+                  <Input
+                    name="search"
+                    fullWidth="true"
+                    placeholder="Search Clients"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PiMagnifyingGlass className="text-[25px]" />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+              </div>
+              <div>
+                <Tooltip title="Add New Client" placement="top" arrow>
+                  <div onClick={handleCreateClient("body")}>
+                    <button className="bg-primary-red hover:bg-red-400 transition-all text-white w-[44px] h-[44px] flex justify-center items-center rounded-full shadow-xl">
+                      <Add />
+                    </button>
+                  </div>
+                </Tooltip>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
       <CreateUser open={open} scroll={scroll} setOpen={setOpen} />
+      <CreateClient open={openClient} scroll={scroll} setOpen={setOpenClient} />
       <Filter open={openFilters} setOpen={setOpenFilters} setIsFiltered={setIsFiltered} />
     </div>
   );
