@@ -103,7 +103,7 @@ const CreateUser = ({ open, setOpen, scroll }) => {
             <div className="flex flex-col gap-2 p-3 text-gray-500 font-primary">
               <div className="text-xl flex justify-start items-center gap-2 font-normal">
                 <PiNotepad size={23} />
-                <span>Employee Detials</span>
+                <span>Employee Details</span>
               </div>
               <Divider />
 
@@ -125,7 +125,7 @@ const CreateUser = ({ open, setOpen, scroll }) => {
                         size="small"
                         fullWidth
                         error={Boolean(errors[field.key])}
-                        helperText={errors[field.key] || " "}
+                        helperText={errors[field.key] || undefined}
                         placeholder={field.placeholder}
                         value={values[field.key]}
                         onChange={(e) => handleChange(field.key, e.target.value)}

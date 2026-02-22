@@ -20,8 +20,7 @@ const formFields = [
 
 const EditClient = ({ open, setOpen, scroll = "paper" }) => {
   const dispatch = useDispatch();
-  const { currentEmployee, isFetching } = useSelector((state) => state.user);
-  const currentClient = currentEmployee;
+  const { currentEmployee: currentClient, isFetching } = useSelector((state) => state.user);
   const initialClientState = React.useMemo(
     () => ({
       firstName: currentClient?.firstName || "",
@@ -32,7 +31,7 @@ const EditClient = ({ open, setOpen, scroll = "paper" }) => {
       CNIC: currentClient?.CNIC || "",
       email: currentClient?.email || "",
     }),
-    [currentClient]
+    [currentClient],
   );
 
   const [clientData, setClientData] = React.useState(initialClientState);
@@ -80,7 +79,7 @@ const EditClient = ({ open, setOpen, scroll = "paper" }) => {
           <div className="flex flex-col gap-2 p-3 text-gray-500 font-primary">
             <div className="text-xl flex justify-start items-center gap-2 font-normal">
               <PiNotepad size={23} />
-              <span>Client Detials</span>
+              <span>Client Details</span>
             </div>
             <Divider />
 

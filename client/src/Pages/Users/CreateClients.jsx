@@ -81,7 +81,7 @@ const CreateClient = ({ open, setOpen, scroll }) => {
             <div className="flex flex-col gap-2 p-3 text-gray-500 font-primary">
               <div className="text-xl flex justify-start items-center gap-2 font-normal">
                 <PiNotepad size={23} />
-                <span>Client Detials</span>
+                <span>Client Details</span>
               </div>
               <Divider />
 
